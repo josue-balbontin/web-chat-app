@@ -1,4 +1,5 @@
 import Blocks from "../Blocks/Blocks";
+import { RUTAS } from "../../constants/Rutas";
 
 export const Router = {
     rutas : new Map<string , () => Blocks>() ,
@@ -30,10 +31,10 @@ export const Router = {
             return;
         }
 
-        const creadorComponente = this.rutas.get(ruta) || this.rutas.get("/404");
+        const creadorComponente = this.rutas.get(ruta) || this.rutas.get(RUTAS.ERROR404);
 
         if(!creadorComponente){
-            console.error(`No se encontró un componente para la ruta ${ruta} y no se definió una ruta /404`);
+            console.error(`No se encontró un componente para la ruta ${ruta} y no se definió una ruta ${RUTAS.ERROR404}`);
             return ; 
         }
 
