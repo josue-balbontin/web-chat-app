@@ -21,5 +21,8 @@
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.1",
     "vite": "^8.0.4"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.9"
   }
 }
