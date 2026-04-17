@@ -1,32 +1,32 @@
+import { RUTAS } from "../../../constants/Rutas";
 import Blocks from "../../../Controllers/Blocks/Blocks";
+import { Router } from "../../../Controllers/router/Router";
 import './ErrorPage.css';
 import templateHbs from './ErrorPage.hbs?raw';
-import Handlebars from 'handlebars';
+
 
 
 export class ErrorPage extends Blocks {
 
-    codigo : number; 
+    propiedades : { codigo : number , mensaje : string } ;
+
     
-    mensaje : string;
 
     constructor(codigo : number = 500, mensaje : string = "Ya lo estamos solucionando"){
-        super(); 
-        this.codigo = codigo;
-        this.mensaje = mensaje; 
+        super(templateHbs); 
+        this.propiedades = { codigo, mensaje };
     }
 
 
-    obtenerHtml(): Element | null {
-        const generadorHtml = Handlebars.compile(templateHbs);
-        const htmlEnTexto = generadorHtml({ codigo: this.codigo, mensaje: this.mensaje });
-
-
-        const creadorTemporal = document.createElement('template');
-        creadorTemporal.innerHTML = htmlEnTexto;
-
-
-        return creadorTemporal.content.firstElementChild;
+      agregarEventos(elementoRaiz: Element): void {
+        const botonRegresar = elementoRaiz.querySelector('.Error__regresar');
         
+        if (botonRegresar) {
+            botonRegresar.addEventListener('click', () => {
+
+                Router.ir(RUTAS.CHAT); 
+            });
+        }
     }
+
 }
